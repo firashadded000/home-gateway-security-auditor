@@ -19,3 +19,12 @@ uvicorn app.main:app --reload & streamlit run dashboard.py
 
 ## Pistes d'extension (CV)
 Remplacer les données simulées par des captures **Mininet + Wireshark/tshark** (features par flux), ingérer des alertes **Wazuh** (API REST), ajouter SHAP pour l'explicabilité, dashboard Grafana provisionné en JSON.
+
+## Captures d'écran
+
+![Dashboard Streamlit](docs/streamlit.png)
+![Dashboard Grafana](docs/grafana.png)
+![Rapport PDF](docs/report.png)
+
+## Limites
+Les données (configuration et trafic) sont **simulées**. Les scores du modèle (F1 ≈ 1,0) valident la chaîne de bout en bout, pas une performance sur du trafic réel.
