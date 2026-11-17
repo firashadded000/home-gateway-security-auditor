@@ -1,0 +1,12 @@
+import os, requests, pandas as pd, streamlit as st
+API = os.getenv("API_URL", "http://localhost:8000")
+st.set_page_config(page_title="Home Gateway Security Auditor", layout="wide")
+st.title("🛡️ AI-Powered Home Gateway Security Auditor")
+a = requests.get(f"{API}/assessment").json(); t = requests.get(f"{API}/threats").json()
+c1, c2, c3 = st.columns(3)
+c1.metric("Score de sécurité", f"{a['score']}/100"); c2.metric("Vulnérabilités", len(a["findings"])); c3.metric("Flux suspects (ML)", len(t))
+st.subheader("Configuration à risque"); st.dataframe(pd.DataFrame(a["findings"]), use_container_width=True)
+st.subheader("Événements suspects"); st.dataframe(pd.DataFrame(t), use_container_width=True)
+if t: st.bar_chart(pd.DataFrame(t).attack_type.value_counts())
+if st.button("🤖 Expliquer avec l'assistant IA"): st.info(requests.get(f"{API}/assistant").json()["advice"])
+st.download_button("📄 Rapport PDF", requests.get(f"{API}/report").content, "security_report.pdf")

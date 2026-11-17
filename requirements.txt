@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+scikit-learn
+pandas
+joblib
+reportlab
+streamlit
+requests
+prometheus-client
+langchain-core
+langchain-anthropic
